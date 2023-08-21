@@ -1,4 +1,4 @@
-## Meta-GTNRP: a novel few-shot GNN-Transformer approach for nuclear receptor binding activity prediction
+### Meta-GTNRP: a few-shot GNN-Transformer approach for nuclear receptor binding activity prediction
 
 In this paper, we propose a few-shot GNN-Transformer, Meta-GTNRP to model the local and global information of molecular graph embeddings using a two-module meta-learning framework for NR-binding activity prediction. This few-shot learning strategy combines the information of 11 individual predictive tasks for 11 different NRs in a joint learning procedure to predict the binding, agonist and antagonist activity with just a few labeled compounds in highly imbalanced scenarios.
 
