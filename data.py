@@ -263,19 +263,9 @@ class MoleculeDataset(InMemoryDataset):
                  transform=None,
                  pre_transform=None,
                  pre_filter=None,
-                 dataset='tox21',
+                 dataset='nura',
                  empty=False):
-        """
-        Adapted from qm9.py. Disabled the download functionality
-        :param root: directory of the dataset, containing a raw and processed
-        dir. The raw dir should contain the file containing the smiles, and the
-        processed dir can either empty or a previously processed file
-        :param dataset: name of the dataset. Currently only implemented for
-        zinc250k, chembl_with_labels, tox21, hiv, bace, bbbp, clintox, esol,
-        freesolv, lipophilicity, muv, pcba, sider, toxcast
-        :param empty: if True, then will not load any data obj. For
-        initializing empty dataset
-        """
+                     
         self.dataset = dataset
         self.root = root
 
