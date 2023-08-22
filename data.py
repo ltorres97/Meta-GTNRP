@@ -166,16 +166,15 @@ def split_into_directories(data):
     T = {}
     C = {}
 
-    kk = 0
     if data == "nura":
         
         for k,j in enumerate(file):
         
           sample = j.split(",")
           sample_final = sample[2:35]
-          #sample_final = sample_final[2::3] #BIN data
+          sample_final = sample_final[2::3] #BIN data
           #sample_final = sample_final[0::3] #AGO data
-          sample_final = sample_final[1::3] #ANT data
+          #sample_final = sample_final[1::3] #ANT data
           
           smile = sample[1]
           
@@ -196,7 +195,7 @@ def split_into_directories(data):
         print(C)
 
         for t in T:
-            d = 'Data/' + data + "/pre-processed_ANT/" + "task_" +str(t+1)
+            d = 'Data/' + data + "/pre-processed/" + "task_" +str(t+1)
             os.makedirs(d, exist_ok=True)
             os.makedirs(d + "/raw", exist_ok=True)
             os.makedirs(d + "/processed", exist_ok=True)
@@ -265,7 +264,7 @@ class MoleculeDataset(InMemoryDataset):
                  pre_filter=None,
                  dataset='nura',
                  empty=False):
-                     
+
         self.dataset = dataset
         self.root = root
 
@@ -351,7 +350,6 @@ def create_circular_fingerprint(mol, radius, size, chirality):
                                        nBits=size, useChirality=chirality)
     return np.array(fp)
 
-
 def _load_nura_dataset(input_path):
     """
     :param input_path:
@@ -361,41 +359,13 @@ def _load_nura_dataset(input_path):
     with open(input_path, 'rb') as f:
        binary_list = pickle.load(f)
 
-    #print(binary_list)
-  
-    smiles_list = []
-    for l in binary_list:
-        for i in l:
-            smiles_list.append(i[:-1])
-    
-    rdkit_mol_objs_list = []
-    for s in smiles_list:
-        rdkit_mol_objs_list.append(Chem.MolFromSmiles(s))
-        
-    labels = np.zeros((len(smiles_list),1), dtype=int)
-    
-    print(binary_list[0])
-    labels[len(binary_list[0]):,0] = 1 
-    
-    return smiles_list, rdkit_mol_objs_list, labels
-
-
-def _load_nura_dataset(input_path):
-    """
-    :param input_path:
-    :return: list of smiles, list of rdkit mol obj, np.array containing the
-    labels
-    """
-    with open(input_path, 'rb') as f:
-       binary_list = pickle.load(f)
-
-    #print(binary_list)
+    print(binary_list)
     smiles_list = []
     for l in binary_list:
         for i in l:
             smiles_list.append(i)
     
-    #print(smiles_list)
+    print(smiles_list)
     rdkit_mol_objs_list = [AllChem.MolFromSmiles(s) for s in smiles_list]
     labels = np.zeros((len(smiles_list),1), dtype=int)
     labels[len(binary_list[0]):,0] = 1 
@@ -440,7 +410,7 @@ def get_largest_mol(mol_list):
     return mol_list[largest_mol_idx]
 
 def dataset(data):
-    root = "Data/" + data + "/pre-processed_ANT/"
+    root = "Data/" + data + "/pre-processed/"
     T = 11
     if data == "nura":
         T = 11
