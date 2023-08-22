@@ -349,44 +349,6 @@ class MoleculeDataset(InMemoryDataset):
         data, slices = self.collate(data_list)
         torch.save((data, slices, data_smiles_list), self.processed_paths[0])
 
-
-def merge_dataset_objs(dataset_1, dataset_2):
-    """
-    Naively merge 2 molecule dataset objects, and ignore identities of
-    molecules. Assumes both datasets have multiple y labels, and will pad
-    accordingly. ie if dataset_1 has obj_1 with y dim 1310 and dataset_2 has
-    obj_2 with y dim 128, then the resulting obj_1 and obj_2 will have dim
-    1438, where obj_1 have the last 128 cols with 0, and obj_2 have
-    the first 1310 cols with 0.
-    :return: pytorch geometric dataset obj, with the x, edge_attr, edge_index,
-    new y attributes only
-    """
-    d_1_y_dim = dataset_1[0].y.size()[0]
-    d_2_y_dim = dataset_2[0].y.size()[0]
-
-    data_list = []
-    # keep only x, edge_attr, edge_index, padded_y then append
-    for d in dataset_1:
-        old_y = d.y
-        new_y = torch.cat([old_y, torch.zeros(d_2_y_dim, dtype=torch.long)])
-        data_list.append(Data(x=d.x, edge_index=d.edge_index,
-                              edge_attr=d.edge_attr, y=new_y))
-
-    for d in dataset_2:
-        old_y = d.y
-        new_y = torch.cat([torch.zeros(d_1_y_dim, dtype=torch.long), old_y.long()])
-        data_list.append(Data(x=d.x, edge_index=d.edge_index,
-                              edge_attr=d.edge_attr, y=new_y))
-
-    # create 'empty' dataset obj. Just randomly pick a dataset and root path
-    # that has already been processed
-    new_dataset = MoleculeDataset(root='dataset/chembl_with_labels',
-                                  dataset='chembl_with_labels', empty=True)
-    # collate manually
-    new_dataset.data, new_dataset.slices = new_dataset.collate(data_list)
-
-    return new_dataset
-
 def create_circular_fingerprint(mol, radius, size, chirality):
     """
     :param mol:
