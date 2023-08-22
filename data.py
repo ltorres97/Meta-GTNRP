@@ -9,7 +9,7 @@ from rdkit.Chem import AllChem
 from rdkit.Chem.rdMolDescriptors import GetMorganFingerprintAsBitVect
 from torch_geometric.data import Data
 from torch_geometric.data import InMemoryDataset
-from itertools import repeat, product, chain
+from itertools import repeat
 import random
 
 allowable_features = {
