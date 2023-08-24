@@ -44,7 +44,7 @@ def sample_train(data, batch_size, n_support, n_query):
     
     query_sets = []
     
-    train_tasks = [10] # replace with training tasks
+    train_tasks = [2,3,4,5,6,7,8,9,10,11] # replace with training tasks
     
     for train_task in train_tasks:
          dataset = MoleculeDataset("Data/" + data + "/pre-processed/task_" + str(train_task), dataset = data)
