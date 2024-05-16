@@ -141,14 +141,13 @@ class GNNTR():
         self.k_train = 5
         self.k_test = 10
         self.device = 0
-        self.loss = nn.BCEWithLogitsLoss()
         self.gnn = GNN_prediction(self.graph_layers, self.emb_size, jk = "last", dropout_prob = 0.5, pooling = "mean", gnn_type = gnn)
         self.transformer = TR(300, (30,1), 1, 128, 5, 5, 256) 
         self.gnn.from_pretrained(pretrained)
         self.pos_weight = torch.FloatTensor([5]).to(self.device)
+        self.loss = nn.BCEWithLogitsLoss(pos_weight=self.pos_weight)
         self.loss_transformer = nn.BCEWithLogitsLoss(pos_weight=self.pos_weight)
-        self.transformer.to(self.device)
-        self.meta_opt = torch.optim.Adam(self.transformer.parameters(), lr=1e-5)
+        self.meta_opt = torch.optim.Adam(self.transformer.parameters(), lr=1e-3)
         
         graph_params = []
         graph_params.append({"params": self.gnn.gnn.parameters()})
@@ -156,6 +155,7 @@ class GNNTR():
         
         self.opt = optim.Adam(graph_params, lr=self.learning_rate, weight_decay=0) 
         self.gnn.to(torch.device("cuda:0"))
+        self.transformer.to(torch.device("cuda:0"))
         
         if self.baseline == 0:
             self.ckp_path_gnn = "checkpoints/meta-gtnrp/BIN_PR/Meta-GTNRP_GNN_10.pt"
@@ -167,12 +167,21 @@ class GNNTR():
         elif self.baseline == 1:
             
             self.ckp_path_gnn = "checkpoints/gin/BIN_PR/GIN_GNN_10.pt"
-            
             #self.gnn, self.opt, start_epoch = load_ckp(self.ckp_path_gnn, self.gnn, self.opt)
       
     def update_graph_params(self, loss, lr_update):
-        grads = torch.autograd.grad(loss, self.gnn.parameters())
-        return parameters_to_vector(grads), parameters_to_vector(self.gnn.parameters()) - parameters_to_vector(grads) * lr_update
+        
+        grads = torch.autograd.grad(loss, self.gnn.parameters(), retain_graph=True, allow_unused=True)
+        used_grads = [grad for grad in grads if grad is not None]
+        
+        return parameters_to_vector(used_grads), parameters_to_vector(self.gnn.parameters()) - parameters_to_vector(used_grads) * lr_update
+    
+    def update_tr_params(self, loss, lr_update):
+       
+        grads_tr = torch.autograd.grad(loss, self.transformer.parameters())
+        used_grads_tr = [grad for grad in grads_tr if grad is not None]
+        
+        return parameters_to_vector(used_grads_tr), parameters_to_vector(self.transformer.parameters()) - parameters_to_vector(used_grads_tr) * lr_update
 
     def meta_train(self):
         self.gnn.train()
@@ -185,6 +194,8 @@ class GNNTR():
         
         for k in range(0, self.k_train):
             graph_params = parameters_to_vector(self.gnn.parameters())
+            if self.baseline == 0:
+                tr_params = parameters_to_vector(self.transformer.parameters())
             query_losses = torch.tensor([0.0]).to(device)
             for t in range(self.train_tasks):
                 
@@ -215,6 +226,10 @@ class GNNTR():
                 
                 updated_grad, updated_params = self.update_graph_params(loss_support, lr_update = self.lr_update)
                 vector_to_parameters(updated_params, self.gnn.parameters())
+
+                if self.baseline == 0:
+                    updated_grad_tr, updated_tr_params = self.update_tr_params(inner_losses, lr_update = self.lr_update)
+                    vector_to_parameters(updated_tr_params, self.transformer.parameters())
                 
                 for batch_idx, batch in enumerate(tqdm(query_sets[t], desc="Iteration")):
                     batch = batch.to(device)
@@ -243,7 +258,8 @@ class GNNTR():
                         query_outer_losses =  torch.cat((query_outer_losses, outer_losses), 0)
 
                 vector_to_parameters(graph_params, self.gnn.parameters())
-            
+                if self.baseline == 0:
+                    vector_to_parameters(tr_params, self.transformer.parameters())
             
             query_losses = torch.sum(query_losses)
                 
@@ -287,6 +303,8 @@ class GNNTR():
         t=0
         
         graph_params = parameters_to_vector(self.gnn.parameters())
+        if self.baseline == 0:
+            tr_params = parameters_to_vector(self.transformer.parameters())
         device = torch.device("cuda:" + str(self.device)) if torch.cuda.is_available() else torch.device("cpu")
         
         for test_task in range(self.test_tasks):
@@ -313,15 +331,18 @@ class GNNTR():
                     
                     if self.baseline == 0:
                         
-                        with torch.no_grad():
-                            val_logit, emb = self.transformer(self.gnn.pool(emb, batch.batch))
-                        
+                        val_logit, emb = self.transformer(self.gnn.pool(emb, batch.batch))
                         loss_tr = self.loss_transformer(F.sigmoid(val_logit).double(), y.to(torch.float64))
                         loss_logits += torch.sum(loss_tr)/val_logit.size(dim=0)
                           
                     
                 updated_grad, updated_params = self.update_graph_params(graph_loss, lr_update = self.lr_update)
                 vector_to_parameters(updated_params, self.gnn.parameters())
+                
+                if self.baseline == 0:
+                    updated_grad_tr, updated_tr_params = self.update_tr_params(loss_logits, lr_update = self.lr_update)
+                    vector_to_parameters(updated_tr_params, self.transformer.parameters())
+
             
             nodes=[]
             labels=[]
@@ -359,5 +380,7 @@ class GNNTR():
             roc_scores, f1_scores, p_scores, sn_scores, sp_scores, acc_scores, bacc_scores  = metrics(roc_scores, f1_scores, p_scores, sn_scores, sp_scores, acc_scores, bacc_scores, y_label, y_pred)
             
             vector_to_parameters(graph_params, self.gnn.parameters())
+            if self.baseline == 0:
+                vector_to_parameters(tr_params, self.transformer.parameters())
         
         return [roc_scores, f1_scores, p_scores, sn_scores, sp_scores, acc_scores, bacc_scores], self.gnn.state_dict(), self.transformer.state_dict(), self.opt.state_dict(), self.meta_opt.state_dict()
