@@ -179,14 +179,14 @@ class GNNTR_eval():
         self.k_train = 5
         self.k_test = 10
         self.device = 0
-        self.loss = nn.BCEWithLogitsLoss()
         self.gnn = GNN_prediction(self.graph_layers, self.emb_size, jk = "last", dropout_prob = 0.5, pooling = "mean", gnn_type = gnn)
         self.transformer = TR(300, (30,1), 1, 128, 5, 5, 256) 
         self.gnn.from_pretrained(pretrained)
         self.pos_weight = torch.FloatTensor([5]).to(self.device)
+        self.loss = nn.BCEWithLogitsLoss(pos_weight=self.pos_weight)
         self.loss_transformer = nn.BCEWithLogitsLoss(pos_weight=self.pos_weight)
-        self.transformer.to(self.device)
         self.meta_opt = torch.optim.Adam(self.transformer.parameters(), lr=1e-5)
+                
 
         graph_params = []
         graph_params.append({"params": self.gnn.gnn.parameters()})
@@ -194,6 +194,7 @@ class GNNTR_eval():
         
         self.opt = optim.Adam(graph_params, lr=self.learning_rate, weight_decay=0) 
         self.gnn.to(torch.device("cuda:0"))
+        self.transformer.to(torch.device("cuda:0"))
         
         if self.baseline == 0:
             self.ckp_path_gnn = "checkpoints/meta-gtnrp/BIN_PR/Meta-GTNRP_GNN_10.pt"
