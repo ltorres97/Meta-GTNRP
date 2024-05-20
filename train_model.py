@@ -26,7 +26,7 @@ if dataset == "nura":
 
     labels =  ['BIN_PR']
     
-for epoch in range(1, 251):
+for epoch in range(1, 2001):
     
     best = False
 
