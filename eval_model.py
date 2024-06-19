@@ -65,13 +65,13 @@ for epoch in range(1, 100):
       acc.append(round(acc_scores,4))
       bacc.append(round(bacc_scores,4))
     
-    #save_result(epoch, N, roc, "results-exp/ANT_PPARG/mean_GraphSAGE/roc-GraphSAGE_5.txt")
-    #save_result(epoch, N, f1s, "results-exp/ANT_PPARG/mean_GraphSAGE/f1s-GraphSAGE_5.txt")
-    #save_result(epoch, N, prs, "results-exp/ANT_PPARG/mean_GraphSAGE/prs-GraphSAGE_5.txt")
-    #save_result(epoch, N, sns, "results-exp/ANT_PPARG/mean_GraphSAGE/sns-GraphSAGE_5.txt")
-    #save_result(epoch, N, sps, "results-exp/ANT_PPARG/mean_GraphSAGE/sps-GraphSAGE_5.txt")
-    #save_result(epoch, N, acc, "results-exp/ANT_PPARG/mean_GraphSAGE/acc-GraphSAGE_5.txt")
-    #save_result(epoch, N, bacc, "results-exp/ANT_PPARG/mean_GraphSAGE/bacc-GraphSAGE_5.txt")
+    #save_result(epoch, N, roc, "results-exp/BIN_PR/mean_Meta-GTNRP/roc-Meta-GTNRP_5.txt")
+    #save_result(epoch, N, f1s, "results-exp/BIN_PR/mean_Meta-GTNRP/f1s-Meta-GTNRP_5.txt")
+    #save_result(epoch, N, prs, "results-exp/BIN_PR/mean_Meta-GTNRP/prs-Meta-GTNRP_5.txt")
+    #save_result(epoch, N, sns, "results-exp/BIN_PR/mean_Meta-GTNRP/sns-Meta-GTNRP_5.txt")
+    #save_result(epoch, N, sps, "results-exp/BIN_PR/mean_Meta-GTNRP/sps-Meta-GTNRP_5.txt")
+    #save_result(epoch, N, acc, "results-exp/BIN_PR/mean_Meta-GTNRP/acc-Meta-GTNRP_5.txt")
+    #save_result(epoch, N, bacc, "results-exp/BIN_PR/mean_Meta-GTNRP/bacc-Meta-GTNRP_5.txt")
 
 
     
