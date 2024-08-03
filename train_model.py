@@ -51,7 +51,7 @@ for epoch in range(1, 2001):
             'optimizer': t_opt
     }
     
-    checkpoint_dir = 'checkpoints/meta-gtnrp/' + task_name + "/"
+    checkpoint_dir = "checkpoints/" + model_name.lower() + "/" + task_name + "/"
 
     for i in range(0, len(roc_scores)):
         if roc[i] < roc_scores[i]:
