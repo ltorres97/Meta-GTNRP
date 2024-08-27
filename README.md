@@ -24,7 +24,7 @@ Data is pre-processed and transformed into molecular graphs using RDKit.Chem.
 
 Data pre-processing and pre-trained models are implemented based on [Strategies for Pre-training Graph Neural Networks (Hu et al.) (2020)](https://arxiv.org/abs/1905.12265).
 
-## Code Usage
+## Python Packages
 
 ### Installation
 We used the following Python packages for core development. We tested on Python 3.9.
