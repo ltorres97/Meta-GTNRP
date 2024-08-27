@@ -26,7 +26,6 @@ Data pre-processing and pre-trained models are implemented based on [Strategies 
 
 ## Python Packages
 
-### Installation
 We used the following Python packages for core development. We tested on Python 3.9.
 
 ```
