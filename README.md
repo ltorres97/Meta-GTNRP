@@ -22,7 +22,7 @@ In this work, data is collected using a public compound repository known as [NUR
 
 Data is pre-processed and transformed into molecular graphs using RDKit.Chem. 
 
-Data pre-processing and pre-trained models are implemented based on [Strategies for Pre-training Graph Neural Networks (Hu et al.) (2020)](https://arxiv.org/abs/1905.12265).
+Data pre-processing, pre-trained and GNN models are implemented based on [Strategies for Pre-training Graph Neural Networks (Hu et al.) (2020)](https://arxiv.org/abs/1905.12265).
 
 ## Python Packages
 
