@@ -6,7 +6,7 @@ First, a GIN module treats molecules as a set of node and edge features converte
 
 ![ScreenShot](figures/meta-gtnrp.png?raw=true)
 
-To address the challenge of low-data learning, we introduce a two-module meta-learning framework to quickly update model parameters across few-shot tasks for 10 different NRDs to predict the binding activity of compounds on 1 new NR in the test data.
+To address the challenge of low-data learning, we introduce a two-module meta-learning framework to quickly update model parameters across few-shot tasks for 10 different NRs to predict the binding activity of compounds on 1 new NR in the test data.
 
 ![ScreenShot](figures/meta.png?raw=true)
 
