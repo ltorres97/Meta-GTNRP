@@ -90,7 +90,18 @@ We used the following Python packages for core development. We tested on Python 
 }
 
 ```
-[4] Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., Dehghani, M., Minderer, M., Heigold, G., Gelly, S., Uszkoreit, J., Houlsby, N. (2020). An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. https://doi.org/10.48550/arxiv.2010.11929
+
+[4] Guo, Z., Zhang, C., Yu, W., Herr, J., Wiest, O., Jiang, M., & Chawla, N. V. (2021). Few-shot graph learning for molecular property prediction. In The Web Conference 2021 - Proceedings of the World Wide Web Conference, WWW 2021 (pp. 2559–2567). Association for Computing Machinery, Inc. https://doi.org/10.1145/3442381.3450112
+```
+@article{guo2021few,
+  title={Few-Shot Graph Learning for Molecular Property Prediction},
+  author={Guo, Zhichun and Zhang, Chuxu and Yu, Wenhao and Herr, John and Wiest, Olaf and Jiang, Meng and Chawla, Nitesh V},
+  journal={arXiv preprint arXiv:2102.07916},
+  year={2021}
+}
+```
+
+[5] Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., Dehghani, M., Minderer, M., Heigold, G., Gelly, S., Uszkoreit, J., Houlsby, N. (2020). An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. https://doi.org/10.48550/arxiv.2010.11929
 
 ```
 @article{Dosovitskiy2020,
@@ -103,7 +114,7 @@ We used the following Python packages for core development. We tested on Python 
 }
 
 ```
-[5] Vision Transformers with PyTorch. https://github.com/lucidrains/vit-pytorch
+[6] Vision Transformers with PyTorch. https://github.com/lucidrains/vit-pytorch
 
 ```
 @misc{Phil Wang,
@@ -117,7 +128,7 @@ We used the following Python packages for core development. We tested on Python 
 
 ```
 
-[6] Cortes-Ciriano, I. (2016). Bioalerts: A python library for the derivation of structural alerts from bioactivity and toxicity data sets. Journal of Cheminformatics, 8(1). https://doi.org/10.1186/s13321-016-0125-7
+[7] Cortes-Ciriano, I. (2016). Bioalerts: A python library for the derivation of structural alerts from bioactivity and toxicity data sets. Journal of Cheminformatics, 8(1). https://doi.org/10.1186/s13321-016-0125-7
 
 ```
 @article{bioalerts,
