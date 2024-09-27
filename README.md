@@ -62,7 +62,6 @@ We used the following Python packages for core development. We tested on Python 
    title = {NURA: A curated dataset of nuclear receptor modulators},
    year = {2020}
 }
-
 ```
 
 [2] Hu, W., Liu, B., Gomes, J., Zitnik, M., Liang, P., Pande, V., Leskovec, J.: Strategies for pre-training graph neural networks. CoRR abs/1905.12265 (2020). https://doi.org/10.48550/ARXIV.1905.12265
@@ -75,7 +74,6 @@ We used the following Python packages for core development. We tested on Python 
   year={2020},
   url={https://openreview.net/forum?id=HJlWWJSFDH}
 }
-
 ```
 
 [3] Finn, C., Abbeel, P., Levine, S.: Model-agnostic meta-learning for fast adaptation of deep networks. In: 34th International Conference on Machine Learning, ICML 2017, vol. 3 (2017). https://doi.org/10.48550/arXiv.1703.03400
@@ -112,8 +110,8 @@ We used the following Python packages for core development. We tested on Python 
    url = {https://arxiv.org/abs/2010.11929},
    year = {2020},
 }
-
 ```
+
 [6] Vision Transformers with PyTorch. https://github.com/lucidrains/vit-pytorch
 
 ```
@@ -125,7 +123,6 @@ We used the following Python packages for core development. We tested on Python 
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/lucidrains/vit-pytorch}}
 }
-
 ```
 
 [7] Cortes-Ciriano, I. (2016). Bioalerts: A python library for the derivation of structural alerts from bioactivity and toxicity data sets. Journal of Cheminformatics, 8(1). https://doi.org/10.1186/s13321-016-0125-7
@@ -144,7 +141,6 @@ We used the following Python packages for core development. We tested on Python 
    volume = {8},
    year = {2016},
 }
-
 ```
 
 
