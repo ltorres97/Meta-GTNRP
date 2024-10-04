@@ -1,6 +1,6 @@
 ## Meta-GTNRP: a novel few-shot GNN-Transformer approach for nuclear receptor binding activity prediction
 
-## Correction of Minor Error:
+# Correction of Minor Error:
 In the published work (https://doi.org/10.1186/s13321-024-00902-4), there is a minor phrasing error in the text. The phrase "has promoted to a great deal of research" should be corrected to "has led to a great deal of research." 
 This correction does not affect the overall findings or conclusions of the study, but I wanted to clarify it for accuracy.
 
