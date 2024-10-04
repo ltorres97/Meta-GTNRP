@@ -16,11 +16,13 @@ This repository provides the source code and datasets for the proposed work.
 
 Contact Information: (uc2015241578@student.uc.pt, luistorres@dei.uc.pt), if you have any questions about this work.
 
+```
 Correction of Minor Error:
 
 In the published work (https://doi.org/10.1186/s13321-024-00902-4), there is a minor phrasing error in the text. The phrase "has promoted to a great deal of research" should be corrected to "has led to a great deal of research."
 
 This correction does not affect the overall findings or conclusions of the study, but I wanted to clarify it for accuracy. Thank you for your understanding!
+```
 
 ## Data Availability and Pre-Processing
 
