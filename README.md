@@ -1,3 +1,5 @@
+## Meta-GTNRP: a novel few-shot GNN-Transformer approach for nuclear receptor binding activity prediction
+
 #### Correction of Minor Error: In the published work (https://doi.org/10.1186/s13321-024-00902-4), there is a minor phrasing error in the text. The phrase "Their biochemical significance has promoted to a great deal of research in the fields of toxicology and medicinal chemistry" should be corrected to "Their biochemical significance has promoted a great deal of research in the fields of toxicology and medicinal chemistry." This correction does not affect the overall findings or conclusions of the study, but I wanted to clarify it for accuracy.
 
 
