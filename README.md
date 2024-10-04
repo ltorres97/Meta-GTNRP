@@ -19,12 +19,6 @@ This repository provides the source code and datasets for the proposed work.
 
 Contact Information: (uc2015241578@student.uc.pt, luistorres@dei.uc.pt), if you have any questions about this work.
 
-## Correction of Minor Error:
-
-In the published work (https://doi.org/10.1186/s13321-024-00902-4), there is a minor phrasing error in the text. The phrase "has promoted to a great deal of research" should be corrected to "has led to a great deal of research."
-
-This correction does not affect the overall findings or conclusions of the study, but I wanted to clarify it for accuracy.
-
 ## Data Availability and Pre-Processing
 
 In this work, data is collected using a public compound repository known as [NURA (NUclear Receptor Activity) dataset (Valsecchi et al.) (2020)](https://www.sciencedirect.com/science/article/pii/S0041008X20303707?via=ihub), which includes publicly available information on the activity of 15247 compounds on 11 human NRs.
