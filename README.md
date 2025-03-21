@@ -2,6 +2,7 @@
 
 #### In the published work (https://doi.org/10.1186/s13321-024-00902-4), we have identified a minor phrasing error. The phrase *"Their biochemical significance has promoted to a great deal of research in the fields of toxicology and medicinal chemistry"* should be corrected to *"Their biochemical significance has promoted a great deal of research in the fields of toxicology and medicinal chemistry"*. This correction does not affect the overall findings or conclusions of the study, but I wanted to clarify it for accuracy.
 
+#### Note: The listed value N = 100 (number of patches) in the Table 2 is a placeholder and not used in the implementation. With an input dimension of 300 and patch size of 30, the actual number of patches is 10.
 
 In this paper, we propose a few-shot GNN-Transformer, Meta-GTNRP to model the local and global information of molecular graph embeddings using a two-module meta-learning framework for NR-binding activity prediction. This few-shot learning strategy combines the information of 11 individual predictive tasks for 11 different NRs in a joint learning procedure to predict the binding, agonist and antagonist activity with just a few labeled compounds in highly imbalanced scenarios.
 
